@@ -40,5 +40,10 @@ public class JabatanServiceImpl implements JabatanService{
 		jabatanDb.deleteById(id);
 		
 	}
+	@Override
+	public int getTotalPegawai(JabatanModel jabatan) {
+		
+		return jabatan.getTotalPegawai();
+	}
 
 }

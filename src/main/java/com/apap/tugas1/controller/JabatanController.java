@@ -49,6 +49,7 @@ public class JabatanController {
 		JabatanModel jabatan = jabatanService.getJabatan(idJabatan);
 		model.addAttribute("jabatan",jabatan);
 		model.addAttribute("infoGaji", (long) jabatan.getGajiPokok().doubleValue());
+		model.addAttribute("totalPegawai", jabatanService.getTotalPegawai(jabatan));
 		return "view-jabatan";
 	}
 	@RequestMapping(value = "/jabatan/ubahh", method = RequestMethod.GET)

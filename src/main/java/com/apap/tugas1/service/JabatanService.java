@@ -10,4 +10,5 @@ public interface JabatanService {
 	JabatanModel getJabatan(long id);
 	void updateJabatan(JabatanModel jabatan);
 	void hapusJabatan(long id);
+	int getTotalPegawai(JabatanModel jabatan);
 }

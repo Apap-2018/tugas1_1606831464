@@ -20,14 +20,16 @@
 									<th>Nama</th>
 									<th>Deskripsi</th>
 									<th>Gaji Pokok</th>
+									<th>Total Pegawai</th>
 								</tr>
 							</thead>
  							<tbody>
     							<tr th:each="jabatan : ${listJabatan}">
     								<td th:text="${jabatan.nama}"></td>
     								<td th:text="${jabatan.deskripsi}"></td>
-    								<td th:text="${jabatan.gajiPokok}"></td>
+    								<td th:text="${jabatan.getTotalPegawai()}"></td>
    								</tr>
+   								
 
   							</tbody>
 						</table>
