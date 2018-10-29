@@ -2,12 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Home</title>
+    <title>Lihat semua Jabatan</title>
 
     <object th:include="fragments/fragments :: css" th:remove="tag"></object>
     <object th:include="fragments/fragments :: js" th:remove="tag"></object>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/datatables.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 
 <body>
@@ -20,16 +21,15 @@
 									<th>Nama</th>
 									<th>Deskripsi</th>
 									<th>Gaji Pokok</th>
-									<th>Total Pegawai</th>
+									
 								</tr>
 							</thead>
  							<tbody>
     							<tr th:each="jabatan : ${listJabatan}">
     								<td th:text="${jabatan.nama}"></td>
     								<td th:text="${jabatan.deskripsi}"></td>
-    								<td th:text="${jabatan.getTotalPegawai()}"></td>
+    								<td th:text="${jabatan.gajiPokok}"></td>
    								</tr>
-   								
 
   							</tbody>
 						</table>
