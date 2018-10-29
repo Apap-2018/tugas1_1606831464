@@ -3,6 +3,7 @@ package com.apap.tugas1.service;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -104,5 +105,17 @@ public class PegawaiServiceImpl implements PegawaiService {
 		pegawai.setNip(generateNip(pegawai));
 		pegawaiDb.save(pegawai);
 		
+	}
+
+	@Override
+	public List<PegawaiModel> getAllPegawai() {
+		
+		return pegawaiDb.findAll();
+	}
+
+	@Override
+	public ArrayList<PegawaiModel> getPegawaiByInstansi(InstansiModel instansi) {
+		
+		return pegawaiDb.findByInstansi(instansi);
 	}
 }

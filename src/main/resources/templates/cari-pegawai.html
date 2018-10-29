@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Tambah Pegawai</title>
+
+    <object th:include="fragments/fragments :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragments :: js" th:remove="tag"></object>
+
+    
+</head>
+
+<body>
+<div id="Content" class="container-full-bg">
+<nav th:replace="fragments/fragments :: navbar"></nav>
+    <div class="container vertical-center" style="padding-top: 32px;">
+        	<h2 th:text="'Cari Pegawai'"></h2>
+		<form th:action="@{/pegawai/cari}" th:object="${pegawai}" method="GET">
+			
+			<table class="table">
+				<tbody>
+					<tr>
+						<td th:text="'Provinsi'"></td>
+				 		<td>
+			 				<select class="form-control" name="idProvinsi" id="provinsi"/>
+			 					<option disabled="disabled" selected="selected" >Pilih Provinsi</option>
+								<option th:each="provinsi : ${allProvinsi}"
+								th:value="${provinsi.id}"
+								th:text="${provinsi.nama}"></option>
+			 				</select>
+				 		</td>
+					</tr>
+					<tr>
+						<td th:text="'Nama Instansi'"></td>
+						<td>
+							<select class="form-control" name="idInstansi" id="instansi" style="display:none"/>
+								<option disabled="disabled" selected="selected" >Pilih Instansi</option>
+							</select>
+			 				<select class="form-control" name="idInstansi" id="instansiAsli"/>
+			 					<option disabled="disabled" selected="selected" >Pilih Instansi</option>
+								<option th:each="instansi : ${allInstansi}"
+								th:value="${instansi.id}"
+								th:text="${instansi.nama}"></option>
+			 				</select>
+				 		</td>
+					</tr>
+					<tr>
+						<td th:text="'Jabatan'"></td>
+						<td>
+			 				<select class="form-control" name="idJabatan"/>
+			 					<option disabled="disabled" selected="selected" >Pilih Jabatan</option>
+								<option th:each="jabatan : ${allJabatan}"
+								th:value="${jabatan.id}"
+								th:text="${jabatan.nama}"></option>
+			 				</select>
+				 		</td>
+					</tr>
+				</tbody>		
+			</table>
+			<button type="submit" class="btn-primary btn">Cari</button>
+		</form>
+		<hr>
+		<div class="table-responsive table">
+        	<table class="table table-hover" id="myTable">
+        		<thead>
+        			<th>No</th>
+        			<th>NIP</th>
+        			<th>Nama</th>
+        			<th>Tempat Lahir</th>
+        			<th>Tanggal Lahir</th>
+        			<th>Tahun Masuk</th>
+        			<th>Jabatan</th>
+        			<!-- for debug only -->
+        			<th>Instansi</th>
+        		</thead>
+        		<tbody>
+     			<tr th:each="pegawai,iterationStatus : ${allData}">
+     				<td th:text="${iterationStatus.count}"></td>
+					<td th:text="${pegawai.nip}"></td>
+					<td th:text="${pegawai.nama}"></td>
+					<td th:text="${pegawai.tempatLahir}"></td>
+					<td th:text="${pegawai.tanggalLahir}"></td>
+					<td th:text="${pegawai.tahunMasuk}"></td>
+					<td>
+					<ul th:each="jabatan : ${pegawai.getJabatanList()}">
+						<li th:text="${jabatan.nama}"/>
+					</ul>
+					</td>
+					<td th:text="${pegawai.getInstansi().getNama()}+' - '+${pegawai.getInstansi().getProvinsi().getNama()}"></td>
+				</tr>
+     		</tbody>
+        	</table>
+        </div>
+    </div>
+         <script type="text/javascript">
+	$(document).ready(function(){
+		$('#myTable').DataTable();
+		console.log("hey")
+		$('#provinsi').change(function() {
+			valueProv = $(this).val();
+			console.log(valueProv)
+			$.ajax({
+				type: "GET",
+				url: "http://localhost:8080/pegawai/tambah/instansi?provinsi=",
+				data: {
+					'provinsiId' : valueProv
+				},
+				dataType: 'json',
+				success: function(data) {
+					console.log(data);
+					getIns = '';
+					var size = data.length;
+				
+					for (var i = 0; i<size; i++) {
+						getIns+='<option value="'+data[i].id+'">'+data[i].nama+'</option>';
+						console.log(data[i]);
+						console.log(data[i].nama)
+					}
+					console.log(getIns);
+					$('#instansi').show();
+					$('#instansi').append(getIns);
+					$('#instansiAsli').remove();
+				},
+				error: function(rs,e) {
+					alert(rs.responseText)
+				}
+			})
+		
+		
+		})
+	});
+</script>
+</div>
+</body>
+</html>

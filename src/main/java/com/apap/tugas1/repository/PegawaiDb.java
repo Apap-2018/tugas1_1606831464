@@ -22,5 +22,5 @@ public interface PegawaiDb extends JpaRepository<PegawaiModel, Long>{
 	 Optional<PegawaiModel> findByNip(String nip);
 	 List<PegawaiModel> findAllByInstansiOrderByTanggalLahirAsc(InstansiModel instansi);
 		List<PegawaiModel> findAllByInstansiOrderByTanggalLahirDesc(InstansiModel instansi);
-	//ArrayList<PegawaiModel> findByInstansi (InstansiModel instansi);
+	ArrayList<PegawaiModel> findByInstansi (InstansiModel instansi);
 }

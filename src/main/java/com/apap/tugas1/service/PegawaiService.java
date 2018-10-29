@@ -1,4 +1,5 @@
 package com.apap.tugas1.service;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,5 +19,7 @@ public interface PegawaiService {
 	List<PegawaiModel> getPegawaiMuda(InstansiModel instansi);
 	List<PegawaiModel> getPegawaiTua(InstansiModel instansi);
 	void tambahPegawai(PegawaiModel pegawai);
+	List<PegawaiModel> getAllPegawai();
+	ArrayList<PegawaiModel> getPegawaiByInstansi(InstansiModel instansi);
 	
 }
