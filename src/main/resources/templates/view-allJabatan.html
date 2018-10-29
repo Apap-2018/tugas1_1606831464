@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home</title>
+
+    <object th:include="fragments/fragments :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragments :: js" th:remove="tag"></object>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/datatables.css">
+</head>
+
+<body>
+    <nav th:replace="fragments/fragments :: navbar"></nav>
+    <div class="container-fluid">
+    
+						<table id="table_id"class="display">
+							<thead>
+								<tr>
+									<th>Nama</th>
+									<th>Deskripsi</th>
+									<th>Gaji Pokok</th>
+								</tr>
+							</thead>
+ 							<tbody>
+    							<tr th:each="jabatan : ${listJabatan}">
+    								<td th:text="${jabatan.nama}"></td>
+    								<td th:text="${jabatan.deskripsi}"></td>
+    								<td th:text="${jabatan.gajiPokok}"></td>
+   								</tr>
+
+  							</tbody>
+						</table>
+   </div>
+   </div>
+</body>
+<script type="text/javascript" charset="utf8" src="/js/datatables.js">
+</script>
+<script>
+$(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>
+</html>
+
+

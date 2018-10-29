@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+    <title></title>
+
+    <object th:include="fragments/fragments :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragments :: js" th:remove="tag"></object>
+</head>
+	
+	<body>
+		<nav th:replace="fragments/fragments :: navbar"></nav>
+		<br>
+		<center>
+		<h2>Data Pegawai Termuda</h2>
+		<br>
+		<div class="row">
+		<div class="container-fluid">
+		<div class="col-md-6">
+		<form>
+			<table>
+				<tr>
+					<td width="200" height="40">NIP</td>
+					<td th:text=" ${pegawaiMuda.nip}" width="350"></td>
+				</tr>
+				<tr>
+					<td height="40">Nama</td>
+					<td th:text=" ${pegawaiMuda.nama}"></td>
+				</tr>
+				<tr>
+					<td height="40">Tempat Lahir</td>
+					<td th:text=" ${pegawaiMuda.tempatLahir}"></td>
+				</tr>
+				<tr>
+					<td height="40">Tanggal Lahir</td>
+					<td th:text=" ${pegawaiMuda.tanggalLahir}"></td>
+				</tr>
+				<tr>
+					<td height="40">Tahun Masuk</td>
+					<td th:text=" ${pegawaiMuda.tahunMasuk}"></td>
+				</tr>
+				<tr>
+					<td height="40">Nama Instansi</td>
+					<td th:text=" ${namaInstansiMuda} + ' - '+${pegawaiMuda.instansi.provinsi.nama}"></td>
+				</tr>
+				<tr>
+      				<td height="40">Jabatan</td>
+      				<td><ul th:each="jabatannya : ${listJabatanMuda}">
+ 							<li th:text="${jabatannya.nama}"/>	
+ 						</ul>
+ 					</td>	
+   				</tr>
+			</table>
+			</form>
+			</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<center>
+		<h2>Data Pegawai Tertua</h2>
+		<br>
+		<div class="row">
+		<div class="container-fluid">
+		<div class="col-md-6">
+		<form>
+			<table>
+				<tr>
+					<td width="200" height="40">NIP</td>
+					<td th:text=" ${pegawaiTua.nip}" width="350"></td>
+				</tr>
+				<tr>
+					<td height="40">Nama</td>
+					<td th:text=" ${pegawaiTua.nama}"></td>
+				</tr>
+				<tr>
+					<td height="40">Tempat Lahir</td>
+					<td th:text=" ${pegawaiTua.tempatLahir}"></td>
+				</tr>
+				<tr>
+					<td height="40">Tanggal Lahir</td>
+					<td th:text=" ${pegawaiTua.tanggalLahir}"></td>
+				</tr>
+				<tr>
+					<td height="40">Tahun Masuk</td>
+					<td th:text=" ${pegawaiTua.tahunMasuk}"></td>
+				</tr>
+				<tr>
+					<td height="40">Nama Instansi</td>
+					<td th:text=" ${namaInstansiTua} + ' - '+${pegawaiTua.instansi.provinsi.nama}"></td>
+				</tr>
+				<tr>
+      				<td height="40">Jabatan</td>
+      				<td><ul th:each="jabatannya : ${listJabatanTua}">
+ 							<li th:text="${jabatannya.nama}"/>	
+ 						</ul>
+ 					</td>	
+   				</tr>
+			</table>
+			</form>
+			</div>
+			</div>
+			</div>
+		</center>
+	</body>
+</html>

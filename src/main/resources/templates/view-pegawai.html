@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home</title>
+
+    <object th:include="fragments/fragments :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragments :: js" th:remove="tag"></object>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragments :: navbar"></nav>
+  
+       
+            <div class="col-md">
+                <div class="card">
+                    <div class="card-header">
+                       <h1 th:text="'Lihat Data Pegawai - '+${pegawai.nip}"></h1>
+                    </div>
+                    <div class="card-body">
+					<div class="container">
+						<table class="table table-borderless table-striped">
+ 							<tbody>
+    							<tr>
+      								<th>NIP</th>
+      								<td th:text="${pegawai.nip}"></td>
+   								</tr>
+   								<tr>
+      								<th>Nama</th>
+      								<td th:text="${pegawai.nama}"></td>
+   								</tr>
+   								<tr>
+      								<th>Tempat Lahir</th>
+      								<td th:text="${pegawai.tempatLahir}"></td>
+   								</tr>
+   								<tr>
+      								<th>Tanggal Lahir</th>
+      								<td th:text="${pegawai.tanggalLahir}"></td>
+   								</tr>
+   								<tr>
+      								<th>Tahun Masuk</th>
+      								<td th:text="${pegawai.tahunMasuk}"></td>
+   								</tr>
+   								<tr>
+      								<th>Nama Instansi</th>
+      								<td th:text="${pegawai.instansi.nama}+'-'+${pegawai.instansi.provinsi.nama}"></td>
+   								</tr>
+   								<tr>
+      								<th>Jabatan</th>
+      								<td>
+      								<ul th:each="jabatan : ${pegawai.jabatanList}">
+ 										<li th:text="${jabatan.nama}"/>	
+ 									</ul>
+ 									</td>	
+   								</tr>
+   								<tr>
+      								<th>Gaji</th>
+      								<td th:text="'Rp.'+${gaji}"></td>
+   								</tr>
+  							</tbody>
+						</table>
+					</div>
+				
+                </div>
+            </div>
+        </div>
+        <br>
+        <center>
+        <form th:action="@{'/pegawai/ubah'}" th:object="${pegawai}" method="GET">
+        <input type="hidden" name="nip" th:value="*{nip}"/>
+        <button value="submit" class="btn btn-primary">Ubah Pegawai</button>
+    </form>
+    </center>
+   
+</body>
+</html>

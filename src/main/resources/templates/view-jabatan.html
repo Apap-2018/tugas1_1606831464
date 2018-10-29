@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home</title>
+
+    <object th:include="fragments/fragments :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragments :: js" th:remove="tag"></object>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragments :: navbar"></nav>
+  
+       
+            <div class="col-md">
+                <div class="card">
+                    <div class="card-header">
+                       <h1 th:text="'Detail Jabatan '+${jabatan.nama}"></h1>
+                    </div>
+                    <div class="card-body">
+					<div class="container">
+						<table class="table table-borderless table-striped">
+ 							<tbody>
+    							<tr>
+      								<th>Nama</th>
+      								<td th:text="${jabatan.nama}"></td>
+   								</tr>
+   								<tr>
+      								<th>Deskripsi</th>
+      								<td th:text="${jabatan.deskripsi}"></td>
+   								</tr>
+   								<tr>
+      								<th>Gaji Pokok</th>
+      								<td th:text="${infoGaji}"></td>
+   								</tr>
+  							</tbody>
+						</table>
+					</div>
+				
+                </div>
+            </div>
+        </div>
+        <br>
+        <center>
+        <form th:action="@{'/jabatan/ubahh'}" th:object="${jabatan}" method="GET">
+        	<input type="hidden" name="idJabatan" th:value="*{id}"/>
+        	<button value="submit" class="btn btn-primary">Ubah</button>
+   		 </form>
+   		 <br>
+   		 <form th:action="@{'/jabatan/hapus'}" th:object="${jabatan}" method="POST">
+        	<input type="hidden" name="idJabatan" th:value="*{id}"/>
+        	<button value="submit" class="btn btn-primary">Hapus</button>
+   		 </form>
+    </center>
+   
+</body>
+</html>
+<script th:inline="javascript">
+var message = /*[[${message}]]*/
+if  (message != null){
+	alert(message);
+}
+
+</script>
