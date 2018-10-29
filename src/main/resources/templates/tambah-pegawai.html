@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Update Pegawai</title>
+    <title>Tambah Pegawai</title>
 
     <object th:include="fragments/fragments :: css" th:remove="tag"></object>
     <object th:include="fragments/fragments :: js" th:remove="tag"></object>
@@ -13,12 +13,12 @@
             <div class="col-md">
                 <div class="card">
                     <div class="card-header">
-                       <h1>Ubah Pegawai</h1>
+                       <h1>Tambah Pegawai</h1>
                     </div>
                     <div class="card-body">
 					<div class="container">
-						<form th:action="@{/pegawai/ubah}" th:object="${pegawai}" method="POST">
-							<input type="hidden" name="nip" th:value="${pegawai.nip}"/>
+						<form th:action="@{/pegawai/tambah}" th:object="${pegawai}" method="POST">
+							
   							<div class="form-group">
     						<label for="nama">Nama</label>
     						<input type="text" class="form-control" name="nama" th:value="*{nama}" aria-describedby="emailHelp" required="required" placeholder="Enter nama">
@@ -38,13 +38,13 @@
   						<div class="form-group">
     						<label for="provinsi">Provinsi</label>
     						<select  class="form-control" required="required" name="provinsi" id="provinsi" >
-							     	<option th:each="provinsi : ${listProvinsi}" th:value="${provinsi.id}" th:text="${provinsi.nama}" th:selected="${provinsi.id} == *{instansi.provinsi.id}" ></option>
+							     	<option th:each="provinsi : ${listProvinsi}" th:value="${provinsi.id}" th:text="${provinsi.nama}" ></option>
 						    	</select>
 						    	</div>
 						    <div class="form-group">
     						<label for="instansi">Nama Instansi</label>
     						<select  class="form-control" required="required" name="instansi" id="instansi">
-							     	<option th:each="instansi : ${listInstansi}" th:value="${pegawai.instansi.id}" th:text="${instansi.nama} + ' - ' + ${instansi.provinsi.nama}" th:selected="${pegawai.instansi.id==instansi.id}"></option>
+							     	<option th:each="instansi : ${listInstansi}" th:value="${instansi.id}" th:text="${instansi.nama} + ' - ' + ${instansi.provinsi.nama}" ></option>
 						    	</select>
 						    	</div>
 						    
@@ -57,7 +57,7 @@
 						    	</div>
 						    	<button type="submit" name="addRow">Tambah</button>
 						    	</div>
-       <button type="submit" class="btn btn-primary" name = "update">Submit</button>
+       <button type="submit" class="btn btn-primary" name = "add">Submit</button>
     </form>
     </div>
     </div>

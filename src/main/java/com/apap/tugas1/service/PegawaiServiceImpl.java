@@ -39,7 +39,9 @@ public class PegawaiServiceImpl implements PegawaiService {
 				gajiFix = listJabatan.get(x).getGajiPokok();
 			}
 		}
+		System.out.println(pegawaiDb.findByNip(nip).get().getNama());
 		double tunjangan = pegawaiDb.findByNip(nip).get().getInstansi().getProvinsi().getPresentaseTunjangan();
+		
 		double gaji = gajiFix + ((tunjangan/100)*gajiFix);
 		return (long)gaji;
 	}
@@ -95,5 +97,12 @@ public class PegawaiServiceImpl implements PegawaiService {
 	@Override
 	public List<PegawaiModel> getPegawaiTua(InstansiModel instansi) {
 		return pegawaiDb.findAllByInstansiOrderByTanggalLahirAsc(instansi);
+	}
+
+	@Override
+	public void tambahPegawai(PegawaiModel pegawai) {
+		pegawai.setNip(generateNip(pegawai));
+		pegawaiDb.save(pegawai);
+		
 	}
 }

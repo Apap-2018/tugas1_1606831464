@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
@@ -110,4 +111,41 @@ public class PegawaiController {
 		return instansiService.getInstansibyProvinsi(provinsi);
 	}
 	
+	@RequestMapping(value="/pegawai/tambah", method = RequestMethod.GET)
+	private String tambahPegawai(Model model) {
+		System.out.println(provinsiService.getAllProvinsi().size());
+		model.addAttribute("listInstansi", instansiService.getAllInstansi());
+		model.addAttribute("listProvinsi", provinsiService.getAllProvinsi());
+		model.addAttribute("pegawai", new PegawaiModel());
+		
+		return "tambah-pegawai";
+	}
+	@RequestMapping(value="/pegawai/tambah", method = RequestMethod.POST, params= {"addRow"})
+	public String addRow(@ModelAttribute PegawaiModel pegawai,Model model) {
+		
+		if (pegawai.getJabatanList() == null) {
+			pegawai.setJabatanList(new ArrayList<JabatanModel>());
+        }
+		pegawai.getJabatanList().add(new JabatanModel());
+		
+		model.addAttribute("pegawai", pegawai);
+		
+		model.addAttribute("listInstansi", instansiService.getAllInstansi());
+		model.addAttribute("listProvinsi", provinsiService.getAllProvinsi());
+		model.addAttribute("listJabatan", jabatanService.getAllJabatan());
+		return "tambah-pegawai";
+	}
+	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.POST, params= {"add"})
+	private String tambahPegawaiSubmit(@ModelAttribute PegawaiModel pegawai,Model model) {
+		System.out.println(pegawai.getJabatanList().size());
+		PegawaiService.tambahPegawai(pegawai);
+		String nip = PegawaiService.generateNip(pegawai);
+		System.out.println(nip);
+		System.out.println(pegawai.getJabatanList().size());
+		//long gaji = PegawaiService.perhitunganGaji(pegawai.getJabatanList(), nip);
+		
+		model.addAttribute("pegawai", pegawai);
+		//model.addAttribute("gaji",gaji);
+		return "tambah-pegawai-berhasil";
+}
 }
